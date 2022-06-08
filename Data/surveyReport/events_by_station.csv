@@ -1,0 +1,309 @@
+"Station","Species","n_events"
+"C1T2P1","Aves",25
+"C1T2P1","Conepatus leuconotus",1
+"C1T2P1","Lynx rufus",3
+"C1T2P1","Sylvilagus floridanus",31
+"C1T2P1","Urocyon cinereoargenteus",4
+"C1T2P11","Aves",11
+"C1T2P11","Canis latrans",1
+"C1T2P11","Conepatus leuconotus",4
+"C1T2P11","Mephitis macroura",1
+"C1T2P11","Odocoileus virginianus",3
+"C1T2P11","Sylvilagus floridanus",30
+"C1T2P11","Urocyon cinereoargenteus",4
+"C1T2P21","Aves",11
+"C1T2P21","Canis lupus familiaris",1
+"C1T2P21","Conepatus leuconotus",1
+"C1T2P21","Mephitis macroura",1
+"C1T2P21","Odocoileus virginianus",10
+"C1T2P21","Sylvilagus floridanus",18
+"C1T2P21","Urocyon cinereoargenteus",6
+"C1T4P1","Odocoileus virginianus",1
+"C1T4P11","Aves",29
+"C1T4P11","Canis lupus familiaris",1
+"C1T4P11","Conepatus leuconotus",8
+"C1T4P11","Lynx rufus",1
+"C1T4P11","Odocoileus virginianus",12
+"C1T4P11","Pecari tajacu",1
+"C1T4P11","Persona",4
+"C1T4P11","Reptiles",4
+"C1T4P11","Roedores",7
+"C1T4P11","Sylvilagus floridanus",37
+"C1T4P11","Urocyon cinereoargenteus",8
+"C1T4P21","Aves",2
+"C1T6P1","Aves",4
+"C1T6P1","Conepatus leuconotus",3
+"C1T6P1","Lynx rufus",1
+"C1T6P1","Sylvilagus floridanus",5
+"C1T6P1","Urocyon cinereoargenteus",3
+"C1T6P21","Aves",3
+"C1T6P21","Canis latrans",2
+"C1T6P21","Lynx rufus",1
+"C1T6P21","Odocoileus virginianus",1
+"C1T6P21","Pecari tajacu",1
+"C1T6P21","Sylvilagus floridanus",18
+"C1T6P21","Urocyon cinereoargenteus",3
+"C2T1P1","Aves",2
+"C2T1P1","Lynx rufus",1
+"C2T1P1","Odocoileus virginianus",3
+"C2T1P1","Persona",4
+"C2T1P1","Sylvilagus floridanus",2
+"C2T1P11","Aves",2
+"C2T1P11","Lynx rufus",1
+"C2T1P11","Odocoileus virginianus",2
+"C2T1P11","Pecari tajacu",1
+"C2T1P11","Persona",4
+"C2T1P21","Pecari tajacu",2
+"C2T1P21","Persona",4
+"C2T1P21","Sylvilagus floridanus",1
+"C2T1P21","Urocyon cinereoargenteus",2
+"C2T2P1","Aves",56
+"C2T2P1","Dasypus novemcinctus",1
+"C2T2P1","Lynx rufus",1
+"C2T2P1","Odocoileus virginianus",3
+"C2T2P1","Pecari tajacu",2
+"C2T2P1","Persona",3
+"C2T2P1","Reptiles",10
+"C2T2P1","Roedores",23
+"C2T2P1","Spilogale angustigrons",2
+"C2T2P1","Sylvilagus floridanus",55
+"C2T2P1","Urocyon cinereoargenteus",6
+"C2T2P11","Aves",4
+"C2T2P11","Persona",5
+"C2T2P21","Aves",9
+"C2T2P21","Odocoileus virginianus",5
+"C2T2P21","Pecari tajacu",1
+"C2T2P21","Persona",3
+"C2T2P21","Sylvilagus floridanus",4
+"C2T2P21","Urocyon cinereoargenteus",8
+"C2T3P1","Aves",3
+"C2T3P1","Lynx rufus",5
+"C2T3P1","Odocoileus virginianus",5
+"C2T3P1","Pecari tajacu",1
+"C2T3P1","Persona",4
+"C2T3P1","Sylvilagus floridanus",1
+"C2T3P1","Urocyon cinereoargenteus",11
+"C2T3P11","Odocoileus virginianus",3
+"C2T3P11","Persona",4
+"C2T3P21","Aves",13
+"C2T3P21","Conepatus leuconotus",3
+"C2T3P21","Mephitis macroura",1
+"C2T3P21","Odocoileus virginianus",5
+"C2T3P21","Persona",3
+"C2T3P21","Reptiles",1
+"C2T3P21","Sylvilagus floridanus",6
+"C2T3P21","Urocyon cinereoargenteus",12
+"C3T0P1","Sylvilagus floridanus",2
+"C3T0P11","Aves",3
+"C3T0P21","Odocoileus virginianus",2
+"C3T1P1","Aves",16
+"C3T1P1","Conepatus leuconotus",4
+"C3T1P1","Odocoileus virginianus",1
+"C3T1P1","Pecari tajacu",1
+"C3T1P1","Persona",1
+"C3T1P1","Roedores",10
+"C3T1P1","Sylvilagus floridanus",7
+"C3T1P1","Urocyon cinereoargenteus",4
+"C3T1P11","Lynx rufus",1
+"C3T1P11","Odocoileus virginianus",1
+"C3T1P21","Aves",1
+"C3T1P21","Conepatus leuconotus",3
+"C3T1P21","Odocoileus virginianus",1
+"C3T1P21","Urocyon cinereoargenteus",1
+"C3T3P11","Pecari tajacu",1
+"C3T3P21","Bassariscus astutus",1
+"C3T3P21","Conepatus leuconotus",2
+"C3T3P21","Lynx rufus",1
+"C3T3P21","Odocoileus virginianus",2
+"C3T3P21","Urocyon cinereoargenteus",2
+"C4T1P1","Aves",5
+"C4T1P1","Lynx rufus",1
+"C4T1P1","Pecari tajacu",1
+"C4T1P1","Persona",4
+"C4T1P1","Procyon lotor",1
+"C4T1P1","Sylvilagus floridanus",2
+"C4T1P11","Aves",4
+"C4T1P11","Canis lupus familiaris",1
+"C4T1P11","Capra hircus",1
+"C4T1P11","Conepatus leuconotus",1
+"C4T1P11","Odocoileus virginianus",2
+"C4T1P11","Persona",4
+"C4T1P21","Aves",1
+"C4T1P21","Lynx rufus",1
+"C4T1P21","Odocoileus virginianus",5
+"C4T1P21","Persona",3
+"C4T2P1","Aves",14
+"C4T2P1","Conepatus leuconotus",1
+"C4T2P1","Odocoileus virginianus",1
+"C4T2P1","Persona",4
+"C4T2P1","Procyon lotor",1
+"C4T2P1","Roedores",2
+"C4T2P1","Spilogale angustigrons",5
+"C4T2P1","Sylvilagus floridanus",30
+"C4T2P1","Urocyon cinereoargenteus",1
+"C4T2P11","Odocoileus virginianus",1
+"C4T2P11","Persona",3
+"C4T2P21","Aves",35
+"C4T2P21","Canis latrans",1
+"C4T2P21","Conepatus leuconotus",2
+"C4T2P21","Mephitis macroura",1
+"C4T2P21","Odocoileus virginianus",13
+"C4T2P21","Persona",4
+"C4T2P21","Puma yagouaroundi",1
+"C4T2P21","Reptiles",1
+"C4T2P21","Sylvilagus floridanus",77
+"C4T2P21","Urocyon cinereoargenteus",1
+"C4T3P1","Capra hircus",2
+"C4T3P1","Persona",4
+"C4T3P1","Sylvilagus floridanus",1
+"C4T3P11","Persona",5
+"C4T3P21","Lynx rufus",2
+"C4T3P21","Odocoileus virginianus",4
+"C4T3P21","Persona",5
+"C4T3P21","Sylvilagus floridanus",2
+"C5T1P1","Aves",178
+"C5T1P1","Conepatus leuconotus",5
+"C5T1P1","Mephitis macroura",10
+"C5T1P1","Odocoileus virginianus",4
+"C5T1P1","Pecari tajacu",25
+"C5T1P1","Persona",4
+"C5T1P1","Procyon lotor",1
+"C5T1P1","Reptiles",5
+"C5T1P1","Sylvilagus floridanus",30
+"C5T1P1","Urocyon cinereoargenteus",36
+"C5T1P11","Pecari tajacu",1
+"C5T1P11","Persona",4
+"C5T1P21","Aves",39
+"C5T1P21","Conepatus leuconotus",3
+"C5T1P21","Mephitis macroura",1
+"C5T1P21","Odocoileus virginianus",6
+"C5T1P21","Pecari tajacu",12
+"C5T1P21","Persona",4
+"C5T1P21","Reptiles",28
+"C5T1P21","Roedores",7
+"C5T1P21","Spilogale angustigrons",2
+"C5T1P21","Sylvilagus floridanus",12
+"C5T1P21","Urocyon cinereoargenteus",2
+"C5T2P1","Aves",5
+"C5T2P1","Conepatus leuconotus",9
+"C5T2P1","Lynx rufus",2
+"C5T2P1","Mephitis macroura",2
+"C5T2P1","Odocoileus virginianus",4
+"C5T2P1","Pecari tajacu",3
+"C5T2P1","Persona",4
+"C5T2P1","Reptiles",2
+"C5T2P1","Sylvilagus floridanus",4
+"C5T2P1","Urocyon cinereoargenteus",9
+"C5T2P11","Aves",13
+"C5T2P11","Conepatus leuconotus",6
+"C5T2P11","Lynx rufus",3
+"C5T2P11","Odocoileus virginianus",1
+"C5T2P11","Pecari tajacu",3
+"C5T2P11","Persona",4
+"C5T2P11","Spilogale angustigrons",2
+"C5T2P11","Sylvilagus floridanus",12
+"C5T2P11","Urocyon cinereoargenteus",3
+"C5T2P21","Persona",9
+"C5T3P1","Aves",35
+"C5T3P1","Conepatus leuconotus",1
+"C5T3P1","Odocoileus virginianus",5
+"C5T3P1","Pecari tajacu",5
+"C5T3P1","Persona",4
+"C5T3P1","Sylvilagus floridanus",2
+"C5T3P1","Urocyon cinereoargenteus",11
+"C5T3P11","Aves",1
+"C5T3P11","Persona",5
+"C5T3P21","Aves",16
+"C5T3P21","Conepatus leuconotus",1
+"C5T3P21","Odocoileus virginianus",2
+"C5T3P21","Pecari tajacu",2
+"C5T3P21","Persona",4
+"C5T3P21","Sylvilagus floridanus",12
+"C6T1P1","Capra hircus",5
+"C6T1P11","Aves",1
+"C6T1P11","Capra hircus",1
+"C6T1P11","Odocoileus virginianus",1
+"C6T1P21","Aves",2
+"C6T1P21","Odocoileus virginianus",1
+"C6T1P21","Spilogale angustigrons",2
+"C6T1P21","Sylvilagus floridanus",15
+"C6T2P1","Aves",1
+"C6T2P1","Canis lupus familiaris",1
+"C6T2P1","Capra hircus",1
+"C6T2P1","Lynx rufus",1
+"C6T2P1","Urocyon cinereoargenteus",1
+"C6T2P11","Aves",1
+"C6T2P11","Lynx rufus",1
+"C6T2P11","Odocoileus virginianus",1
+"C6T2P11","Sylvilagus floridanus",2
+"C6T2P11","Urocyon cinereoargenteus",1
+"C6T3P1","Sylvilagus floridanus",1
+"C6T3P11","Urocyon cinereoargenteus",1
+"C6T3P21","Aves",3
+"CB18P10","Aves",1
+"CB18P10","Capra hircus",3
+"CB18P10","Odocoileus virginianus",12
+"CB18P10","Pecari tajacu",1
+"CB18P10","Urocyon cinereoargenteus",6
+"CB18P11","Aves",15
+"CB18P11","Lynx rufus",4
+"CB18P11","Nasua narica",3
+"CB18P11","Odocoileus virginianus",25
+"CB18P11","Pecari tajacu",1
+"CB18P11","Sylvilagus floridanus",1
+"CB18P12","Aves",1
+"CB18P12","Conepatus leuconotus",3
+"CB18P12","Odocoileus virginianus",10
+"CB18P12","Pecari tajacu",2
+"CB18P12","Sylvilagus floridanus",7
+"CB18P12","Urocyon cinereoargenteus",2
+"CB18P13","Aves",8
+"CB18P13","Conepatus leuconotus",1
+"CB18P13","Odocoileus virginianus",30
+"CB18P13","Sylvilagus floridanus",14
+"CB18P13","Urocyon cinereoargenteus",1
+"CB18P14","Aves",3
+"CB18P14","Lynx rufus",1
+"CB18P14","Odocoileus virginianus",4
+"CB18P14","Pecari tajacu",1
+"CB18P14","Reptiles",2
+"CB18P14","Roedores",1
+"CB18P14","Sylvilagus floridanus",8
+"CB18P14","Urocyon cinereoargenteus",1
+"CB18P15","Lynx rufus",3
+"CB18P15","Odocoileus virginianus",3
+"CB18P15","Pecari tajacu",2
+"CB18P26","Aves",27
+"CB18P26","Bassariscus astutus",2
+"CB18P26","Conepatus leuconotus",6
+"CB18P26","Lynx rufus",1
+"CB18P26","Odocoileus virginianus",1
+"CB18P26","Procyon lotor",1
+"CB18P26","Reptiles",17
+"CB18P26","Roedores",16
+"CB18P26","Urocyon cinereoargenteus",2
+"CB18P27","Odocoileus virginianus",3
+"CB18P28","Aves",85
+"CB18P28","Conepatus leuconotus",8
+"CB18P28","Lynx rufus",3
+"CB18P28","Odocoileus virginianus",11
+"CB18P28","Pecari tajacu",1
+"CB18P28","Sylvilagus floridanus",43
+"CB18P29","Aves",16
+"CB18P29","Canis latrans",2
+"CB18P29","Conepatus leuconotus",2
+"CB18P29","Lynx rufus",10
+"CB18P29","Mephitis macroura",1
+"CB18P29","Nasua narica",1
+"CB18P29","Odocoileus virginianus",3
+"CB18P29","Procyon lotor",31
+"CB18P29","Puma yagouaroundi",5
+"CB18P29","Reptiles",4
+"CB18P29","Urocyon cinereoargenteus",9
+"CB18P30","Odocoileus virginianus",2
+"CB18P32","Lynx rufus",1
+"CB18P32","Odocoileus virginianus",6
+"CB18P9","Conepatus leuconotus",1
+"CB18P9","Odocoileus virginianus",6
+"CB18P9","Procyon lotor",5
+"CB18P9","Urocyon cinereoargenteus",12
