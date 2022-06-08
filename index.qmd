@@ -51,14 +51,14 @@ install.packages(c("tidyverse", # Manejo de datos y gráficas
 
 ## Descargar datos y script
 
-Puedes descargar el proyecto en R que incluye los datos y los scripts que usaremos en la siguiente dirección
+Puedes descargar el proyecto en R que incluye los datos y los scripts que usaremos en la siguiente [dirección](https://github.com/gpandradep/Independencia_espacial/archive/refs/heads/master.zip)
 
 # Presentación
 
 ```{r}
 #| echo: false
 
-xaringanExtra::embed_xaringan(url = "slides/slides.html", ratio = "16:9")
+xaringanExtra::embed_xaringan(url = "slides.html", ratio = "16:9")
 ```
 
 # Código
@@ -556,6 +556,6 @@ En caso de encontrar ACS y dependiendo de los objetivos es recomendable usar her
 
 -   3- [Dorman \*et al.\* 2007. Methods to account for spatial autocorrelation in the analysis of species distributional data: a review](https://onlinelibrary.wiley.com/doi/10.1111/j.2007.0906-7590.05171.x)
 
--    4- [Kuhn & Dorman 2012. Less than eight (and a half) misconceptions of spatial analysis](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1365-2699.2012.02707.x)
+-   4- [Kuhn & Dorman 2012. Less than eight (and a half) misconceptions of spatial analysis](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1365-2699.2012.02707.x)
 
 -   5- [Fletcher & Fortin 2018. Spatial Ecology and Conservation](https://link.springer.com/book/10.1007/978-3-030-01989-1)

@@ -19,16 +19,18 @@ output:
 ```{r setup, include=FALSE}
 library(tidyverse) # Easily Install and Load the 'Tidyverse'
 library(sp) # Classes and Methods for Spatial Data
-library(sf)
+library(sf) # Simple Features for R
 library(gghighlight) # Highlight Lines and Points in 'ggplot2'
 library(showtext) # Using Fonts More Easily in R Graphs
-library(ggtext)
-library(ggspatial)
+library(ggtext) # Improved Text Rendering Support for 'ggplot2'
+library(ggspatial) # Spatial Data Framework for ggplot2
 library(leaflet) # Create Interactive Web Maps with the JavaScript 'Leaflet' Library
 library(AICcmodavg) # Model Selection and Multimodel Inference Based on (Q)AIC(c)
-library(DHARMa)
+library(DHARMa) # Residual Diagnostics for Hierarchical (Multi-Level / Mixed) Regression Models
 library(MASS) # Support Functions and Datasets for Venables and Ripley's MASS
-library(pgirmess)
+
+# Paquetes para correlogramas
+library(pgirmess) # Spatial Analysis and Data Mining for Field Ecologists
 library(ncf) # Spatial Covariance Functions
 font_add_google("Fira Sans", "firasans") # Familia de tipo de letra
 showtext_auto()
@@ -93,45 +95,50 @@ background-size: cover
 ## `r rmarkdown::metadata$subtitle`
 ### `r rmarkdown::metadata$author`; gpandradep@gmail.com
 ---
+class: middle, center
 
 # ¿Autocorrelación espacial (ACS)?
 
 En cualquier análisis de información espacial la ACS puede influir sobre nuestros resultados o inferencias. 
 
 **¿Qué es la ACS?**: Correlación de una variable con ella misma, dada cierta distancia espacial. [(Fortin y Dale 2005)](https://doi.org/10.1017/CBO9780511542039).
---
 
-```{r eval=FALSE, fig.align='center', message=FALSE, warning=FALSE, include=FALSE, out.width="50%"}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="50%"}
 knitr::include_graphics("img/fig1.png")
+
 ```
+
 ---
 class: inverse, center
 
 ### Primera ley de la grografía
 
-```{r eval=FALSE, fig.align='center', message=FALSE, warning=FALSE out.width="50%"}
+*Tobler W., (1970) "A computer movie simulating urban growth in the Detroit region". Economic Geography, 46(Supplement): 234–240. *
+
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="40%"}
 knitr::include_graphics("img/law.png")
 ```
 
-*Tobler W., (1970) "A computer movie simulating urban growth in the Detroit region". Economic Geography, 46(Supplement): 234–240. *
+---
+
+## Es muy común en variables ecológicas
+
+.pull-left[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="100%"}
+knitr::include_graphics("img/drone.jpg")
+```
+]
+.pull-right[
+Muchos de los fenómenos ecológicos dependen de características espaciales resultando en parches o gradientes.
+Probablemente, nada funcionaría en los ecosistemas sin la existencia de una estructura espacial. Imagínense un mundo espacialmente homogéneo.
+]
 
 ---
 
-### Es muy común en ecología
-
-Muchos de los fenómenos ecológicos dependen de características espaciales resultando en parches o gradientes.
-Probablemente, nada funcionaría en los ecosistemas sin la existencia de una estructura espacial. Imagínense un mundo espacialmente homogéneo.
-
-
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, out.width="50%"}
-knitr::include_graphics("img/drone.jng")
-```
-
-
-
 ## ¿ Qué puede causar ACS?
 
-### Los factores más comúnes son [(Dorman *et al.* 2007)](https://onlinelibrary.wiley.com/doi/10.1111/j.2007.0906-7590.05171.x):
+### Los factores más comúnes pueden ser [(Dorman *et al.* 2007)](https://onlinelibrary.wiley.com/doi/10.1111/j.2007.0906-7590.05171.x):
 .pull-left[
 1- **Procesos biológicos**: especiación, dispersión interacciones ecológicas entre otras, son fenómenos relacionados con el espacio.
 
@@ -150,9 +157,9 @@ knitr::include_graphics("https://www.mdpi.com/entropy/entropy-22-00440/article_d
 
 ## ¿Por qué importa la indepedencia espacial?
 
-Pese a que la estructura espacial es común en las variables ecológicas y ambientales ignorarla no es una buena práctica.
+La estructura espacial en las variables ecológicas y ambientales es ubicua. Entonces, ¿Porque molestarnos?
 
-### 1- Razones prácticas
+#### En primera medida por consideraciones metodológicas
 
 La mayoría de los test estadísticos asumen independencia de los datos. Uno de los más comunes son los modelos lineales
 
@@ -162,13 +169,18 @@ La independencia de este tipo de modelos es asumida en los residuales, ya que se
 
 ---
 
-### Las consecuencias
+## Las consecuencias
 
 #### Error tipo I
 
-Infermimos patrones significativos donde no los hay
+El riesto de inferír patrones significativos donde no los hay.
 Por la pseudoreplicación se asumen más grados de libertad de los que hay
-PRecisión artificial de los Errores e intervalos de confianza de parámetros
+Precisión artificial de los Errores e intervalos de confianza de parámetros
+
+```{r fig.align='center', echo=FALSE, message=FALSE, warning=FALSE, out.width="60%"}
+knitr::include_graphics("img/IC.png")
+```
+
 
 ---
 
@@ -197,7 +209,7 @@ knitr::include_graphics("img/SCR.png")
 .pull-right[
 ### No tan buena
 
-Es un gran problema para la prueba estadística de hipótesis y para las predicciones de las mismas, porque viola el supuesto (de casi todas las pruebas) de independencia. Lo que nos puede llevar a cometer errores  **.white[Tipo I]** o incluso invertir la relación de la pendiente en algunos análisis.
+Es un gran problema porque viola el supuesto (de casi todas las pruebas) de independencia. Lo que nos puede llevar a cometer errores  **.white[Tipo I]** o incluso invertir la relación de la pendiente en algunos análisis.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, out.width= "30%"}
 knitr::include_graphics("img/erroresTipoIyII.png")
@@ -249,7 +261,7 @@ class: inverse, center
 Tenemos un muestreo de cámaras trampa en agrupamientos, con una distancia mínima de ~ 500m. Intuitivamente un evaluador te diría que a esta distancia no hay independencia espacial. Particularmente, para especies grandes y que se mueven mucho.
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width= "100%", out.height="60%"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.height="60%", out.width="100%"}
 
 CTtable <- read.csv("Data/CTtable.csv") %>%  # Base de coordenadas de cámaras
  dplyr::select(Station, utm_x, utm_y ) # Seleccionar columnas que usaremos
@@ -262,15 +274,16 @@ CT_points <- SpatialPoints(cbind(CTtable$utm_x,
 # Proyectar a WGS solo para este paso
 CT_points <- spTransform(CT_points, "+proj=longlat +datum=WGS84")
 
-UMA_proj <- st_transform(UMA, "+proj=longlat +datum=WGS84")
 UMA <- st_read("Shape/UMA.shp") # Leer el shape de la UMA
+UMA_proj <- st_transform(UMA, "+proj=longlat +datum=WGS84")
+
 # Es importante verificar que este en la misma proyección (CRS)
 
 # Generar el mapa
 m <- leaflet() %>%
   addProviderTiles(providers$Esri.WorldImagery, group="Satellite") %>%  # Add satellite data
   addProviderTiles(providers$Esri.WorldTopoMap, group="Base") %>% 
-  addCircleMarkers(lng=coordinates(CT_points)[,1], lat=coordinates(CT_points)[,2], 
+  addCircleMarkers(lng=sp::coordinates(CT_points)[,1], lat=sp::coordinates(CT_points)[,2], 
                    popup= paste(CTtable$Station)) %>%
   addPolygons(lng= st_coordinates(UMA_proj)[,1], lat = st_coordinates(UMA_proj)[,2],
               fillOpacity= 0) %>% 
@@ -292,9 +305,13 @@ m
 CTtable <- read.csv("Data/CTtable.csv") %>%  # Base de coordenadas de cámaras
  dplyr::select(Station, utm_x, utm_y ) # Seleccionar columnas que usaremos
   
-knitr::kable(head(CTtable))
-
 ```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+knitr::kable(head(CTtable))
+```
+
 
 ---
 ## Datos
@@ -309,6 +326,11 @@ freq_reg <- read.csv("Data/surveyReport/events_by_station2.csv") %>% # Datos de 
 knitr::kable(head(freq_reg), 'html')
 ```
 
+
+```{r echo=FALSE}
+knitr::kable(head(freq_reg))
+```
+
 ---
 ## Datos
 ### Registro de eventos por especie
@@ -318,13 +340,19 @@ events_by_species <- read_csv("Data/surveyReport/events_by_species.csv") %>%
   type.convert(n_events= col_double(), # Convertir tipo de columna
                n_stations= col_double()) %>% # Convertir tipo de columna
   mutate(Sp_n= paste("*",species,"*", " (n= ", n_events, " ) ", sep = "") ) # Columna para los nombres del eje
-knitr::kable(head(freq_reg), 'html')
+
 
 ```
+
+```{r echo=FALSE}
+knitr::kable(head(freq_reg))
+```
+
+
 ---
 ## Número de registros
 
-```{r}
+```{r echo=FALSE}
 (ndetectionplot <- ggplot(events_by_species, # Datos
                           aes(x= reorder(Sp_n,n_events), #Ordenar sp 
                               y= n_events))+ # No. eventos
@@ -348,7 +376,7 @@ knitr::kable(head(freq_reg), 'html')
 
 
 
-```{r}
+```{r echo=FALSE}
 (hist <- ggplot(freq_reg, aes(x= n_events))+ # Datos
     geom_histogram(binwidth = 3, color= "white")+ # Geometria
     labs(title = " Histograma número de detecciones",
@@ -366,37 +394,7 @@ knitr::kable(head(freq_reg), 'html')
 ---
 ## Distribución de los registros de 🦌
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="80%", out.height="200%", fig.align='center', fig.asp = 9/16}
-UMA <- st_read("Shape/UMA.shp") # Leer el shape de la UMA
-# Es importante verificar que este en la misma proyección (CRS)
 
-# Mapa de registros
-
-(map <- ggplot(UMA)+ # shape de uma
-  geom_sf()+ # Graficar objeto espacial
-  geom_point(data= freq_reg, aes(x=utm_x, y=utm_y, # Agregar puntos
-                 size= n_events, color= n_events), # Tamaño y color
-             alpha=0.9)+ # Transparencia
-  scale_size(range = c(1,20))+ # Escala del radio para los puntos
-  labs(title= "Mapa de número detecciones venado cola blanca",
-       y= "Lat",
-       x= "Lon",
-       size= "Número de \ndetecciones",
-       color=NULL)+
-    annotation_scale(location = "bl", width_hint = 0.5, # Barra de escala
-                     line_width=2, tick_height=10) +
-    annotation_north_arrow(location = "tr", # Flecha de norte
-                           height = unit(2.5, "cm"), width = unit(2.5, "cm"),
-                           pad_x = unit(1, "in"), pad_y = unit(0.5, "in"),
-                           style = north_arrow_fancy_orienteering)+
-  theme_bw()+
-    theme(text=element_text(size=15, family = "special"))+
-  theme(text = element_text(family = 'firasans', size = 16), # tipo de letra
-        plot.title.position = 'plot', # Marco de posición
-        plot.title = element_text(face = 'bold', # Negrillas 
-                                   # Margenes
-                                  hjust = 0.5)))
-```
 
 ---
 ## Modelando la frecuencia de captura del 🦌
@@ -421,6 +419,8 @@ sp_glmdata <- data.frame(cov.fac, cov.num) %>% # Unir covariables
   right_join(freq_reg, by= "Station")# Unir con la base de rgistros
 
 ```
+
+---
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 knitr::kable(head(sp_glmdata, 4), 'html')
@@ -475,6 +475,7 @@ knitr::kable(AIC, 'html', digits = 3)
 ## Procedemos a inspeccionar el modelo
 
 Debido al carácter relativo del AIC es necesario verificar que el mejor modelo es un buen modelo. Un mal ajuste puede ser causado por la existencia de autocorrelación en los residuales.
+.pull-left[
 
 ```{r message=FALSE, warning=FALSE}
 # Debido a que para glm poisson los residuales no se definen directamente, 
@@ -484,10 +485,54 @@ residuales <- simulateResiduals(fittedModel = m5, plot =F)
 ```
 
 
-```{r fig.align='center', warning=FALSE, out.height="100%", out.width="70%"}
+```{r fig.align='center', warning=FALSE, out.height="100%", out.width="70%", eval=FALSE}
 # Verificamos visualmente que el modelo cumpla los requisitos de la distribución
 plotQQunif(residuales)
 ```
+]
+.pull-right[
+```{r echo=FALSE, fig.align='center', warning=FALSE, out.height="100%", out.width="70%"}
+# Verificamos visualmente que el modelo cumpla los requisitos de la distribución
+plotQQunif(residuales)
+```
+
+]
+---
+## Mapa de los residuales
+
+```{r echo=FALSE}
+# Creamos el data.frame para el correlograma
+data_resm5 <- data.frame(res=residuals(residuales), # Residuales que creamos
+                         x= sp_glmdata$utm_x,# coordenadas en x
+                         y= sp_glmdata$utm_y) # coordenadas en y
+
+(map_res <- ggplot(UMA)+ # shape de uma
+    geom_sf()+ # Graficar objeto espacial
+    geom_point(data= data_resm5, aes(x=x, y=y, # Agregar puntos
+                                   size= res, color= res), # Tamaño y color
+               alpha=0.9)+ # Transparencia
+    scale_size(range = c(1,15))+ # Escala del radio para los puntos
+    labs(title= "Mapa de residuales modelo m5",
+         y= "Lat",
+         x= "Lon",
+         size= "Número de \ndetecciones",
+         color=NULL)+
+    annotation_scale(location = "bl", width_hint = 0.5, # Barra de escala
+                     line_width=2, tick_height=10) +
+    annotation_north_arrow(location = "tr", # Flecha de norte
+                           height = unit(2.5, "cm"), width = unit(2.5, "cm"),
+                           pad_x = unit(1, "in"), pad_y = unit(0.5, "in"),
+                           style = north_arrow_fancy_orienteering)+
+    theme_bw()+
+    theme(text=element_text(size=15, family = "special"))+
+    theme(text = element_text(family = 'firasans', size = 16), # tipo de letra
+          plot.title.position = 'plot', # Marco de posición
+          plot.title = element_text(face = 'bold', # Negrillas 
+                                    margin = margin(t = 2, r = 0, b = 7, l = 0, unit = "mm"), # Margenes
+                                    hjust = 0.5)))
+
+```
+
 
 ---
 class: inverse, center
@@ -502,12 +547,23 @@ knitr::include_graphics("https://c.tenor.com/n7Q-cdm8ZLkAAAAd/suspicious-fry-fut
 ---
 ## Exploremos si existe autocorrelación espacial
 
+Usaremos correlogramas espaciales para verificar si existe autocorrelación espacial
+Primero vamos a generar la matriz de distancia. Para asegurar que cada categoría de distancia tenga suficientes pares se recomienda trabajar con 2/3 de la máxima distancia. En este caso la máxima distancia es ~ 8km
+
 ```{r}
-# Creamos el data.frame para el análisis
-data_resm5 <- data.frame(res=residuals(residuales), # Residuales que creamos
-                       x= sp_glmdata$utm_x,# coordenadas en x
-                       y= sp_glmdata$utm_y) # coordenadas en y
+Wdist <- data.frame(x= sp_glmdata$utm_x,
+                    y= sp_glmdata$utm_y) %>% 
+  dist() %>% 
+  as.matrix()
+maxd <- 2/3* max(Wdist)
+maxd
 ```
+
+---
+
+class: inverse, center
+
+##
 
 ### Ahora usamos la función `correlog`, del paquete **nfc**
 

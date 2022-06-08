@@ -129,7 +129,7 @@ UMA_proj <- st_transform(UMA, "+proj=longlat +datum=WGS84")
 m <- leaflet() %>%
   addProviderTiles(providers$Esri.WorldImagery, group="Satellite") %>%  # Add satellite data
   addProviderTiles(providers$Esri.WorldTopoMap, group="Base") %>% 
-  addCircleMarkers(lng=coordinates(CT_points)[,1], lat=coordinates(CT_points)[,2], 
+  addCircleMarkers(lng= sp::coordinates(CT_points)[,1], lat=sp::coordinates(CT_points)[,2], 
                    popup= paste(CTtable$Station)) %>%
   addPolygons(lng= st_coordinates(UMA_proj)[,1], lat = st_coordinates(UMA_proj)[,2],
               fillOpacity= 0) %>% 
