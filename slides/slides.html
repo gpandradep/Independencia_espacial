@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Explorando la independencia espacial</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gabriel Andrade Ponce" />
+    <meta name="date" content="2022-06-08" />
+    <script src="slides_files/header-attrs/header-attrs.js"></script>
+    <script src="slides_files/clipboard/clipboard.min.js"></script>
+    <link href="slides_files/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="slides_files/shareon/shareon.min.js"></script>
+    <link href="slides_files/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="slides_files/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="slides_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="slides_files/tile-view/tile-view.js"></script>
+    <meta name="github-repo" content="gpandradep/ind_spat_fototramp"/>
+    <meta name="twitter:title" content="Explorando la independencia espacial"/>
+    <meta name="twitter:description" content="Explorar la autocorrelación espacial en datos provenientes de fototrampeo."/>
+    <meta name="twitter:url" content="https://introindependenciaespacial.netlify.app/"/>
+    <meta name="twitter:image" content="https://gpandradep.github.io/ind_spat_fototramp/share-card.png"/>
+    <meta name="twitter:image:alt" content="Title slide of Explorando la independencia espacial: &lt;U+0001F98C&gt; para datos de fototrampeo &lt;U+0001F9A8&gt;, presented by Gabriel Andrade"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@Gatorco_AP"/>
+    <meta name="twitter:site" content="@Gatorco_AP"/>
+    <meta property="og:title" content="Explorando la independencia espacial"/>
+    <meta property="og:description" content="Explorar la autocorrelación espacial en datos provenientes de fototrampeo."/>
+    <meta property="og:url" content="https://introindependenciaespacial.netlify.app/"/>
+    <meta property="og:image" content="https://gpandradep.github.io/ind_spat_fototramp/share-card.png"/>
+    <meta property="og:image:alt" content="Title slide of Explorando la independencia espacial: &lt;U+0001F98C&gt; para datos de fototrampeo &lt;U+0001F9A8&gt;, presented by Gabriel Andrade"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Gabriel Andrade"/>
+    <script src="slides_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="slides_files/jquery/jquery-3.6.0.min.js"></script>
+    <link href="slides_files/leaflet/leaflet.css" rel="stylesheet" />
+    <script src="slides_files/leaflet/leaflet.js"></script>
+    <link href="slides_files/leafletfix/leafletfix.css" rel="stylesheet" />
+    <script src="slides_files/proj4/proj4.min.js"></script>
+    <script src="slides_files/Proj4Leaflet/proj4leaflet.js"></script>
+    <link href="slides_files/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="slides_files/leaflet-binding/leaflet.js"></script>
+    <script src="slides_files/leaflet-providers/leaflet-providers_1.9.0.js"></script>
+    <script src="slides_files/leaflet-providers-plugin/leaflet-providers-plugin.js"></script>
+    <link href="slides_files/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="slides_files/datatables-binding/datatables.js"></script>
+    <link href="slides_files/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="slides_files/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="slides_files/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="slides_files/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="slides_files/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+class: inverse, center, bottom
+background-image: url("img/initial.jpg")
+background-position: 50% 50%
+background-size: cover
+
+#Explorando la independencia espacial
+## 🦌 para datos de fototrampeo 🦨
+### Gabriel Andrade Ponce
+[&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt;@Gatorco_AP](https://twitter.com/Gatorco_AP)
+[&lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt;@gpandradep](https://github.com/gpandradep)
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"&gt;&lt;/path&gt;&lt;/svg&gt; gpandradep@gmail.com
+
+---
+class: middle, center
+
+# ¿Autocorrelación espacial (ACS)?
+
+En cualquier análisis de información espacial la ACS puede influir sobre nuestros resultados o inferencias. 
+
+**¿Qué es la ACS?**: Correlación de una variable con ella misma, dada cierta distancia espacial. [(Fortin y Dale 2005)](https://doi.org/10.1017/CBO9780511542039).
+
+&lt;img src="img/fig1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, center
+
+### Primera ley de la grografía
+
+*Tobler W., (1970) "A computer movie simulating urban growth in the Detroit region". Economic Geography, 46(Supplement): 234–240. *
+
+&lt;img src="img/law.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Es muy común en variables ecológicas
+
+.pull-left[
+
+&lt;img src="img/drone.jpg" width="100%" /&gt;
+]
+.pull-right[
+Muchos de los fenómenos ecológicos dependen de características espaciales resultando en parches o gradientes.
+Probablemente, nada funcionaría en los ecosistemas sin la existencia de una estructura espacial. Imagínense un mundo espacialmente homogéneo.
+]
+
+---
+
+## ¿ Qué puede causar ACS?
+
+### Los factores más comúnes pueden ser [(Dorman *et al.* 2007)](https://onlinelibrary.wiley.com/doi/10.1111/j.2007.0906-7590.05171.x):
+.pull-left[
+1- **Procesos biológicos**: especiación, dispersión interacciones ecológicas entre otras, son fenómenos relacionados con el espacio.
+
+2- **Especificación del muestreo**: Distancia de las unidades de muestreo respecto al movimiento de la especie (resolución o grano).
+
+3- **Especificación del modelo**: Relaciones no lineales o modelos que no incluyen una variable ambiental determinante que causa la estructura espacial de la variable de interés.]
+
+.pull-right[
+
+&lt;img src="https://www.mdpi.com/entropy/entropy-22-00440/article_deploy/html/images/entropy-22-00440-g001.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## ¿Por qué importa la indepedencia espacial?
+
+La estructura espacial en las variables ecológicas y ambientales es ubicua. Entonces, ¿Porque molestarnos?
+
+#### En primera medida por consideraciones metodológicas
+
+La mayoría de los test estadísticos asumen independencia de los datos. Uno de los más comunes son los modelos lineales
+
+$$ y_i = \alpha + \beta x_i +\epsilon_i$$
+
+La independencia de este tipo de modelos es asumida en los residuales, ya que se espera que se distribuyan normalmente con media 0 y varianza `\(\sigma2\)`. Es decir que, se espera que cada residual no sea dependiente de otro dentro de la misma distribución.
+
+---
+
+## Las consecuencias
+
+#### Error tipo I
+
+El riesgo de inferír patrones significativos donde no los hay.
+Por la pseudoreplicación se asumen más grados de libertad de los que hay
+Precisión artificial de los Errores e intervalos de confianza de parámetros
+
+&lt;img src="img/IC.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: inverse, center
+
+## La ACS es ¿mala o buena?
+
+&lt;img src="https://c.tenor.com/EHVGbpNqP2oAAAAd/todo-depende-del-cristal-del-cual-se-mira-tadeo.gif" width="40%" /&gt;
+
+---
+class: inverse, center
+
+## La ACS es ¿ mala o buena ?
+
+.pull-left[
+### Buena
+Si tu pregunta ecológica se relaciona con el espacio. Entonces la autocorrelación espacial ayudará a informar sobre cómo ocurren los procesos ecológicos en el espacio y a que escala.
+
+&lt;img src="img/SCR.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+.pull-right[
+### No tan buena
+
+Es un gran problema porque viola el supuesto (de casi todas las pruebas) de independencia. Lo que nos puede llevar a cometer errores  **.white[Tipo I]** o incluso invertir la relación de la pendiente en algunos análisis.
+
+&lt;img src="img/erroresTipoIyII.png" width="30%" /&gt;
+
+
+]
+---
+
+## Detectar y cuantificar la ACS
+
+El primer paso antes de empezar con pruebas o modelos más complejos para lidiar con la ACS, es identificar si es en efecto un problema.
+.pull-left[
+
+### Nota
+- 1- Si se realizan pruebas que asumen independencia, pero no son regresiones. La ACS debe verificarse en los datos "crudos". Ej. pruebas de t, patrones de actividad, entre otras.
+
+- 2- En regresiones donde se modela el efecto de posibles variables ambientales, la ACS se debe verificar en los residuales.
+]
+.pull-right[
+
+### Procedimientos
+
+Existen diversos procedimientos, pero los más comunes son la **I de Moran** o correlograma de Moran y los **semi-variogramas**.
+
+Para este ejercicio usaremos los correlogramas de Moran, pero recomiendo que exploren las ventajas que puede ofrecer un semi-variograma.
+
+]
+---
+### Correlograma de I de Moran
+
+ 
+`$$I= \frac{n}{\sum_{i} \sum_{j}w_{ij}}  \frac{\sum_{i=1}^{n} \sum_{j=1}^{n} w_{i,j}(X_{i}- \overline{X})(X_{j}- \overline{X})} {(X_{i}- \overline{X})^2}$$`
+donde `\(n\)` es el número de unidades `\(i\)` y `\(j\)`; `\(X\)` es la variable de interés; `\(\overline{X}\)` es la media de `\(X\)`; y `\(w_{íj}\)` es la matriz de pesos espaciales. El valor de `\(I\)` puede tomar valores de **1** (autocorrelación positiva), **-1** (autocorrelación positiva) o **0** (distribución aleatoria).
+
+.pull-left[
+&lt;img src="img/correl_ejem.png" width="700%" height="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[ &lt;br&gt;
+#### El correlograma es la inspección gráfica de la ACS a las diferentes distancias de pares de puntos de muestreo.]
+---
+
+class: inverse, center
+
+## Estudio de caso
+
+Tenemos un muestreo de cámaras trampa en agrupamientos, con una distancia mínima de ~ 500m. Intuitivamente un evaluador te diría que a esta distancia no hay independencia espacial. Particularmente, para especies grandes y que se mueven mucho.
+
+
+<div id="htmlwidget-6dc1ac1072bfcf1f32bd" style="width:100%;height:60%;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6dc1ac1072bfcf1f32bd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldTopoMap",null,"Base",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[18.169729357819,18.1671553340643,18.1645903446828,18.1734411191615,18.1708761696209,18.168302006888,18.1771529416967,18.1745878525581,18.1720137298431,18.1716255445778,18.1679852655811,18.1643448655462,18.1699052248464,18.1662649150614,18.1626336960631,18.168167347248,18.1645270966093,18.1608869025484,18.1509788175348,18.1473384559358,18.1436981514342,18.1527165820116,18.1490761614881,18.145444832236,18.1544366133934,18.1507962240511,18.1471557133625,18.1700215498407,18.1674567974395,18.1648830122441,18.1663095356832,18.1637449235902,18.1611710975448,18.1625975836062,18.1600238965439,18.1574592444833,18.1378476530348,18.1377024073131,18.1375565150117,18.1333357854933,18.133199748787,18.1330171899158,18.1288418964153,18.1287238381842,18.1286046928769,18.1496051327454,18.1469501138569,18.1444667381017,18.1458930734032,18.1433285327586,18.1407547780636,18.1421810763901,18.1396074605392,18.137042879912,18.148048669194,18.179342437897,18.1199378409962,18.1562583847567,18.1475390315424,18.1384973508139,18.1405444593392,18.1315926457456,18.1408347607936,18.1318290161557,18.1549560588459,18.1475319749909,18.1574601526836],[-97.1662960398981,-97.1701790241013,-97.1740712546344,-97.1689793227859,-97.1728717168424,-97.1767546445183,-97.171672166078,-97.1755551629562,-97.179447594555,-97.1919182146277,-97.1891202888839,-97.1863130256281,-97.1963308753628,-97.19352342553,-97.1907254459611,-97.2008097964567,-97.1980022717962,-97.1952043103791,-97.1907320435325,-97.1879249824919,-97.1851274835661,-97.18626294968,-97.183455963248,-97.1806584455282,-97.1818412111185,-97.1790437480003,-97.1762369481955,-97.1552916082486,-97.1591746443164,-97.1630671155344,-97.1525992286461,-97.156491661328,-97.1603746289999,-97.1499164088799,-97.1537994328883,-97.1576917020509,-97.1970945428552,-97.2018492714552,-97.206547310005,-97.1967249985431,-97.2014984091627,-97.2061400029505,-97.1963458286036,-97.2011094832488,-97.2057692101587,-97.1498547429544,-97.1537383155787,-97.1576294252288,-97.1471627563636,-97.1510547758329,-97.1549373317478,-97.1444803283189,-97.1483629404273,-97.1522547965624,-97.2019891872507,-97.163473470817,-97.2084276252451,-97.1691206502564,-97.1652424022941,-97.1673589671758,-97.1898660703745,-97.1890888275678,-97.1804131933773,-97.1796653417597,-97.1491652313604,-97.1437907063719,-97.2055503878386],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,["C1T2P1","C1T2P11","C1T2P21","C1T4P1","C1T4P11","C1T4P21","C1T6P1","C1T6P11","C1T6P21","C2T1P1","C2T1P11","C2T1P21","C2T2P1","C2T2P11","C2T2P21","C2T3P1","C2T3P11","C2T3P21","C3T0P1","C3T0P11","C3T0P21","C3T1P1","C3T1P11","C3T1P21","C3T3P1","C3T3P11","C3T3P21","C4T1P1","C4T1P11","C4T1P21","C4T2P1","C4T2P11","C4T2P21","C4T3P1","C4T3P11","C4T3P21","C5T1P1","C5T1P11","C5T1P21","C5T2P1","C5T2P11","C5T2P21","C5T3P1","C5T3P11","C5T3P21","C6T1P1","C6T1P11","C6T1P21","C6T2P1","C6T2P11","C6T2P21","C6T3P1","C6T3P11","C6T3P21","CB18P10","CB18P11","CB18P12","CB18P13","CB18P14","CB18P15","CB18P26","CB18P27","CB18P28","CB18P29","CB18P30","CB18P32","CB18P9"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addPolygons","args":[[[[{"lng":[-97.2172859005134,-97.2139570029167,-97.2129728558998,-97.1913825224009,-97.1963699929149,-97.1819231923053,-97.1668913297059,-97.1660607645097,-97.1470284681208,-97.144224287508,-97.131718577813,-97.2172859005134],"lat":[18.101733231492,18.1346619648168,18.1719761254016,18.1768335980501,18.1964409127629,18.2067307075568,18.2059190710186,18.1976624512793,18.1702763227168,18.1574833105687,18.1381636590262,18.101733231492]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Satellite","Base"],[],{"collapsed":false,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[18.101733231492,18.2067307075568],"lng":[-97.2172859005134,-97.131718577813]}},"evals":[],"jsHooks":[]}</script>
+
+---
+## Datos
+### Ubicación de cámaras
+
+
+```r
+CTtable &lt;- read.csv("Data/CTtable.csv") %&gt;%  # Base de coordenadas de cámaras
+ dplyr::select(Station, utm_x, utm_y ) # Seleccionar columnas que usaremos
+```
+
+
+
+|Station |  utm_x|   utm_y|
+|:-------|------:|-------:|
+|C1T2P1  | 693961| 2009932|
+|C1T2P11 | 693553| 2009643|
+|C1T2P21 | 693144| 2009355|
+|C1T4P1  | 693673| 2010340|
+|C1T4P11 | 693264| 2010052|
+|C1T4P21 | 692856| 2009763|
+
+
+---
+### Frecuencia de registro de especies
+
+
+```r
+freq_reg &lt;- read.csv("Data/surveyReport/events_by_station2.csv") %&gt;% # Datos de registros por estación
+  filter(Species == "Odocoileus virginianus") %&gt;% # Filtrar especie
+  left_join(CTtable, by= "Station") # Unir con la base da cámaras
+```
+
+
+
+|Station |Species                | n_events|  utm_x|   utm_y|
+|:-------|:----------------------|--------:|------:|-------:|
+|C1T2P1  |Odocoileus virginianus |        0| 693961| 2009932|
+|C1T2P11 |Odocoileus virginianus |        3| 693553| 2009643|
+|C1T2P21 |Odocoileus virginianus |       10| 693144| 2009355|
+|C1T4P1  |Odocoileus virginianus |        1| 693673| 2010340|
+|C1T4P11 |Odocoileus virginianus |       12| 693264| 2010052|
+|C1T4P21 |Odocoileus virginianus |        0| 692856| 2009763|
+
+---
+### Registro de eventos por especie
+
+
+```r
+events_by_species &lt;- read_csv("Data/surveyReport/events_by_species.csv") %&gt;% 
+  type.convert(n_events= col_double(), # Convertir tipo de columna
+               n_stations= col_double()) %&gt;% # Convertir tipo de columna
+  mutate(Sp_n= paste("*",species,"*", " (n= ", n_events, " ) ", sep = "") ) # Columna para los nombres del eje
+```
+
+
+|species                | n_events| n_stations|Sp_n                             |
+|:----------------------|--------:|----------:|:--------------------------------|
+|Aves                   |      704|         42|*Aves* (n= 704 )                 |
+|Bassariscus astutus    |        3|          2|*Bassariscus astutus* (n= 3 )    |
+|Canis latrans          |        6|          4|*Canis latrans* (n= 6 )          |
+|Canis lupus familiaris |        4|          4|*Canis lupus familiaris* (n= 4 ) |
+|Capra hircus           |       13|          6|*Capra hircus* (n= 13 )          |
+|Conepatus leuconotus   |       79|         24|*Conepatus leuconotus* (n= 79 )  |
+
+
+---
+## Número de registros
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-17-1.png" width="100%" /&gt;
+---
+## Histograma de registros
+
+
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-18-1.png" width="100%" /&gt;
+
+---
+## Distribución de los registros de 🦌
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
+
+
+
+---
+## Modelando la frecuencia de captura del 🦌
+
+
+```r
+covs.data&lt;-read.csv("Data/covars.csv", header=TRUE) %&gt;% # covariables
+  dplyr::select(-X) # eliminar columna X
+
+covs.data$Cluster&lt;- as.character(covs.data$Cluster) # cluster es categórica
+
+### Separar las variables númericas y categóricas
+cov.num &lt;- covs.data %&gt;% 
+  dplyr::select(where(is.numeric)) %&gt;% # Seleccionar columnas numéricas
+  scale() %&gt;%  # estandarizar
+  as.data.frame()
+
+cov.fac &lt;- covs.data %&gt;% 
+  dplyr::select(where(is.character)) # Seleccionar variables de caracter
+
+sp_glmdata &lt;- data.frame(cov.fac, cov.num) %&gt;% # Unir covariables
+  right_join(freq_reg, by= "Station")# Unir con la base de rgistros
+```
+
+---
+### Así queda nuestra base de datos unida
+
+<div id="htmlwidget-63de076102ac8e88e5f8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-63de076102ac8e88e5f8">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],["C1T2P1","C1T2P11","C1T2P21","C1T4P1","C1T4P11","C1T4P21","C1T6P1","C1T6P21","C2T1P1","C2T1P11"],["MoultrieA30","Moultrie","MoultrieA30","Primos","MoultrieA30","Primos","MoultrieA30","MoultrieA30","Primos","Moultrie"],["Scrub","Scrub","Scrub","Columnar","Scrub","Scrub","Scrub","Scrub","Scrub","Scrub"],["1","1","1","1","1","1","1","1","2","2"],[-0.474460167989714,0.651915742631535,-0.924334030189792,-0.924334030189792,-1.15096221641088,0.651915742631535,1.5550459772738,1.78167416349489,-0.0245863057896353,2.00491983947388],[0.676536845227323,1.46204480279002,2.21930585584048,0.460349463054274,1.17231536197779,1.90526275716346,0.170703411583851,1.71956232837487,1.24870128923056,1.27244851834343],[0.73168194646305,-0.866615191881584,-0.583887043263311,-0.143011029073258,0.212945658101736,0.528453048480945,-1.71622054598244,-1.23349110454668,-0.559671608442187,1.11033012125449],[-0.219555007211602,-0.992730100950781,-1.02586941790604,1.41836580363757,-0.0597005889667775,-1.02586941790604,-0.595058272929865,-1.02586941790604,-0.257208641678746,-0.372259928996592],[-0.208067990902727,-1.46053976426641,-0.0719297546675442,-0.888759172078642,-0.0719297546675442,-0.0719297546675442,-0.0174744601734711,-1.78727153123085,0.717672015496517,0.309257306790968],[-0.426097356191889,-0.316745014039031,-0.180543414827429,-0.192271422549851,-0.0948150761946442,0.0268169068542471,0.0455840205387649,0.242890190703894,0.841608276846302,0.635713047915034],["Odocoileus virginianus","Odocoileus virginianus","Odocoileus virginianus","Odocoileus virginianus","Odocoileus virginianus","Odocoileus virginianus","Odocoileus virginianus","Odocoileus virginianus","Odocoileus virginianus","Odocoileus virginianus"],[0,3,10,1,12,0,0,1,3,2],[693961,693553,693144,693673,693264,692856,693384,692567,691248,691548],[2009932,2009643,2009355,2010340,2010052,2009763,2010748,2010171,2010115,2009715]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Station<\/th>\n      <th>Cam<\/th>\n      <th>Habitat<\/th>\n      <th>Cluster<\/th>\n      <th>Vertcover_50<\/th>\n      <th>Dcrops<\/th>\n      <th>MSAVI<\/th>\n      <th>Slope<\/th>\n      <th>Effort<\/th>\n      <th>Dpop_G<\/th>\n      <th>Species<\/th>\n      <th>n_events<\/th>\n      <th>utm_x<\/th>\n      <th>utm_y<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[5,6,7,8,9,10,12,13,14]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+## Modelando la frecuencia de captura del 🦌
+Creamos algunos modelos que reflejan nuestras hipótesis sobre las variables que afectan la frecuencia de captura.
+
+
+```r
+# Modelos lineales generalizados simples
+
+# sin variables
+m0 &lt;- glm(n_events~ 1, data = sp_glmdata, family = "poisson")
+
+# la frecuencia de registro afectada por la distancia a cultivo
+m1 &lt;- glm(n_events~ Dcrops, data = sp_glmdata, family = "poisson")
+
+# la frecuencia de registro afectada por el verdor de la vegetación
+m2 &lt;- glm(n_events~ MSAVI, data = sp_glmdata, family = "poisson")
+
+# la frecuencia de registro afectada por la pendiente
+m3 &lt;- glm(n_events~ Slope, data = sp_glmdata, family = "poisson") 
+          
+# la frecuencia de registro afectada por la distancia a poblados
+m4 &lt;- glm(n_events~ Dpop_G, data = sp_glmdata, family = "poisson")
+
+# la frecuencia de registro afectada por el tipo de habitat
+m5 &lt;- glm(n_events~ Habitat, data = sp_glmdata, family = "poisson" )
+```
+---
+
+## Modelando la frecuencia de captura del 🦌
+
+Según el criterio de información de AIC nuestro mejor modelo es aquel que incluye el hábitat.
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Modnames &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; K &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; AIC &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Delta_AIC &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ModelLik &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; AICWt &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; LL &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Cum.Wt &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; freq~ Habitat &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 440.026 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -216.013 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; freq~ MSAVI &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 497.635 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57.610 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -246.818 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; freq~ D_cultivos &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 511.129 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 71.104 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -253.565 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; freq~ D_poblado &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 512.423 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72.397 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -254.211 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; freq~ Slope &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 512.494 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72.469 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -254.247 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; freq~ 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 513.182 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 73.156 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -255.591 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+---
+## Procedemos a inspeccionar el modelo
+
+Debido al carácter relativo del AIC es necesario verificar que el mejor modelo es un buen modelo. Un mal ajuste puede ser causado por la existencia de autocorrelación en los residuales.
+.pull-left[
+
+
+```r
+# Debido a que para glm poisson los residuales no se definen directamente, 
+#usamos simulateResiduals del paquete DHARMa
+residuales &lt;- simulateResiduals(fittedModel = m5, plot =F)
+```
+
+
+
+```r
+# Verificamos visualmente que el modelo cumpla los requisitos de la distribución
+plotQQunif(residuales)
+```
+]
+.pull-right[
+&lt;img src="slides_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+---
+## Mapa de los residuales
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-27-1.png" width="100%" height="200%" /&gt;
+
+
+---
+class: inverse, center
+
+# ¿Será esta desviación del ajuste causada por la autocorrelación espacial?
+
+&lt;img src="https://c.tenor.com/n7Q-cdm8ZLkAAAAd/suspicious-fry-futurama.gif" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: inverse, middle, center
+
+.pull-left[
+# Verifiquemos si existe autocorrelación espacial
+
+.footnote[image by [Abigail Spence](https://abigailspenceart.com/)]
+
+]
+
+.pull-right[
+&lt;img src="img/patron.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Exploremos si existe autocorrelación espacial
+
+Usaremos correlogramas espaciales para verificar si existe autocorrelación espacial
+Primero vamos a generar la matriz de distancia. Para asegurar que cada categoría de distancia tenga suficientes pares se recomienda trabajar con 2/3 de la máxima distancia. En este caso la máxima distancia es ~ 8km
+
+
+```r
+Wdist &lt;- data.frame(x= sp_glmdata$utm_x,
+                    y= sp_glmdata$utm_y) %&gt;% 
+  dist() %&gt;% 
+  as.matrix()
+maxd &lt;- 2/3* max(Wdist)
+maxd
+```
+
+```
+## [1] 5410.514
+```
+
+---
+
+# Paquete  `pgirmess`
+`pgirmess` llama las funciones de `spdep` con una sintaxis mas amigable. Esto también hace que sea menos flexible. Esta aproximación asume que la variable de respuesta se distribuye de manera normal para calcular los p valores
+
+
+```r
+pgirmess_correg &lt;- pgirmess::correlog(coords = cbind(data_resm5$x, # coordenada x
+                                                     data_resm5$y), # coordenada y
+                                      z= data_resm5$res, # residuales
+                                      method = "Moran", # Tipo demétodo
+                                      nbclass = NULL) # Automáticamente el número de pares
+```
+
+---
+
+# Paquete `ncf`
+La ventaja del paquete `ncf` es que permite generar correlogramas usando un test de significancia no paramétrico, por medio simulaciones monte Carlo
+
+
+```r
+ncf_correg &lt;- ncf::correlog(x=data_resm5$x, # coordenadas en x
+                            y=data_resm5$y, # coordenadas en y
+                            z=data_resm5$res, # variable de interés,
+                            latlon =  FALSE,
+                            na.rm=T, # en caso de NAs
+                            increment = 700, # Distancia mínima de unidades
+                            resamp=500)
+```
+
+```
+## 50  of  500 
+100  of  500 
+150  of  500 
+200  of  500 
+250  of  500 
+300  of  500 
+350  of  500 
+400  of  500 
+450  of  500 
+500  of  500 
+```
+
+---
+### Modificamos los data set para grraficar las dos aproximaciones en conjutno
+
+
+```r
+corbase &lt;- data.frame(coef=ncf_correg$correlation, 
+                     dist.class= ncf_correg$mean.of.class, 
+                     p.value= ncf_correg$p,
+                     n= ncf_correg$n )%&gt;% 
+  bind_rows(as.data.frame(pgirmess_correg)) %&gt;% 
+  mutate(package= c(rep("ncf", 12), rep("pgirmess",12)),
+         p_valor= if_else(p.value&lt;0.025, "significativo", "no-significativo"))
+```
+
+<div id="htmlwidget-6e68eb17d717a2ce1849" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6e68eb17d717a2ce1849">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[0.085846632592318,0.0267223737057372,-0.093899086049079,-0.134861846627516,0.071010892775079,0.0799903005383439,0.0749897792733983,-0.141547423908985,-0.0848323177998193,0.0546072419604706],[527.467535245864,1044.7161121743,1756.16986897161,2438.59236889033,3154.03915598345,3842.97855249847,4526.03468745416,5243.61603122769,5908.41876978627,6567.78729908388],[0.18562874251497,0.251497005988024,0.0998003992015968,0.0179640718562874,0.029940119760479,0.0399201596806387,0.063872255489022,0.0499001996007984,0.167664670658683,0.317365269461078],[83,198,224,318,310,278,232,162,138,54],["ncf","ncf","ncf","ncf","ncf","ncf","ncf","ncf","ncf","ncf"],["no-significativo","no-significativo","no-significativo","significativo","no-significativo","no-significativo","no-significativo","no-significativo","no-significativo","no-significativo"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>coef<\/th>\n      <th>dist.class<\/th>\n      <th>p.value<\/th>\n      <th>n<\/th>\n      <th>package<\/th>\n      <th>p_valor<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+class: center
+
+## El correlograma
+
+.pull-left[
+
+```r
+(ggplot(corbase ,aes(x=dist.class, y=coef, group= package))+
+    geom_hline(yintercept = 0, linetype= "dashed")+
+    geom_line(size=0.9, colour="black")+
+    geom_point(aes(fill= package, shape=p_valor), 
+               shape= 21, size=5, stroke = 1.5)+
+    ylim(-1,1)+
+    scale_x_continuous(breaks = seq(0,8000, by=500),limits = c(500,6000))+
+    labs(x= "Unidades de distancia (m)", y= " Moran I", 
+         title = " Correlograma de residuales",
+         colour= "Librería")+
+    theme_classic()+
+    theme(text = element_text(family = 'firasans', size = 20), # tipo de letra
+          plot.title.position = 'plot', # Marco de posición
+          plot.title = element_text(face = 'bold', # Negrillas 
+                                    margin = margin(t = 2, r = 0, 
+                                                    b = 7, l = 0, 
+                                                    unit = "mm"), # Margenes
+                                    hjust = 0.5),
+          legend.position = c(0.8, 0.8))) # posición de la legenda
+```
+
+]
+.pull-right[
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-36-1.png" width="100%" /&gt;
+
+]
+
+---
+## SPline
+`ncf` también permite ajustar splines cubicas por medio de bootstrap, en este caso no es necesario definir cortes de pares de distancias y permite obtener intervalos de confianza
+.pull-left[
+
+```r
+spline &lt;- ncf::spline.correlog(x=data_resm5$x, # coordenadas en x
+                               y=data_resm5$y, # coordenadas en y
+                               z=data_resm5$res,
+                               xmax = maxd,
+                               type = "boot",
+                               resamp = 500)
+```
+
+```
+## 50  of  500 
+100  of  500 
+150  of  500 
+200  of  500 
+250  of  500 
+300  of  500 
+350  of  500 
+400  of  500 
+450  of  500 
+500  of  500 
+```
+
+]
+
+.pull-right[
+
+
+```r
+plot(spline)
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-38-1.png" width="100%" /&gt;
+
+]
+
+---
+class: inverse
+
+## La autocorrelación espacial no es el problema
+
+Lo que podemos concluir con todas las aproximaciones vistas es que parece ser que no hay una autocorrelación espacial fuerte de los residuales de nuestro modelo m5. Esto quiere decir que las desviaciones de la normalidad se deben a otro factor.
+
+Ajustamos otro modelo que asumen una distribución de error *binomial negativa*. Con ello nos damos cuenta que el problema era el tipo de distribución.
+
+```r
+m5bn &lt;- glm.nb(n_events~ Habitat, data = sp_glmdata)
+
+residuales.bn &lt;- simulateResiduals(fittedModel = m5bn, plot =F)
+```
+---
+class: inverse
+
+## La autocorrelación espacial no es el problema
+&lt;img src="slides_files/figure-html/unnamed-chunk-40-1.png" width="100%" /&gt;
+---
+class: inverse, center, midle
+
+# Esto apenas es el comienzo
+###Esto fue un ejercicio sencillo, pero lidiar con la ACS merece realizar diversas lecturas en el tema, conocer los supuestos de las técnicas y aprender a interpretar los resultados.
+
+###En caso de encontrar ACS y dependiendo de los objetivos es recomendable usar herramientas como modelos de mínimos cuadrados generalizados (GLS), modelos mixtos, considerar a las coordenadas como covariables o modelos autorregresivos. 
+
+
+---
+class: center
+
+### Aun no estas listo para enfrentarte a la ACS en la vida real, así que te recomiendo leer:
+
+.pull-left[
+-   1- [Fox \*et al.\* 2015. Ecological Statistics: Contemporary theory and application](https://oxford.universitypressscholarship.com/view/10.1093/acprof:oso/9780199672547.001.0001/acprof-9780199672547)
+
+-   2- [Plant 2019. Spatial Data Analysis in Ecology and Agriculture Using R](https://www.routledge.com/Spatial-Data-Analysis-in-Ecology-and-Agriculture-Using-R/Plant/p/book/9780367732325)
+
+-   3- [Dorman \*et al.\* 2007. Methods to account for spatial autocorrelation in the analysis of species distributional data: a review](https://onlinelibrary.wiley.com/doi/10.1111/j.2007.0906-7590.05171.x)
+
+-   4- [Kuhn &amp; Dorman 2012. Less than eight (and a half) misconceptions of spatial analysis](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1365-2699.2012.02707.x)
+
+-   5- [Fletcher &amp; Fortin 2018. Spatial Ecology and Conservation](https://link.springer.com/book/10.1007/978-3-030-01989-1)
+]
+
+.pull-right[
+&lt;img src="https://d23gn3985hkc32.cloudfront.net/wp-content/uploads/2020/12/252164-DangerousToGoAlone.jpg" width="100%" /&gt;
+]
+---
+class: inverse
+background-image: url("img/end.JPG")
+background-position: 50% 50%
+background-size: cover
+
+## Gracias
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

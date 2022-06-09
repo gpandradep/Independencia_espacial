@@ -346,9 +346,9 @@ corbase <- data.frame(coef=ncf_correg$correlation,
 spline <- ncf::spline.correlog(x=data_resm5$x, # coordenadas en x
                                y=data_resm5$y, # coordenadas en y
                                z=data_resm5$res,
-                               xmax = maxd,
+                               xmax = maxd, # Máxima distancia
                                type = "boot",
-                               resamp = 500)
+                               resamp = 500)# Remuestreos
 plot(spline)
 summary(spline)
 
@@ -400,6 +400,8 @@ residuales.bn <- simulateResiduals(fittedModel = m5bn, plot =F)
 plotQQunif(residuales.bn)
 
 # Sorpresa
+
+# Recuerden ver las lecturas al final de la página web
 
 # Fin script ---------------------------------------------------------------------
 

@@ -17,13 +17,15 @@ lang: es
 editor: visual
 ---
 
+[`r icons::fontawesome("twitter")`\@Gatorco_AP](https://twitter.com/Gatorco_AP) [`r icons::fontawesome("github")`\@gpandradep](https://github.com/gpandradep) `r icons::fontawesome("envelope", style = "solid")`gpandradep\@gmail.com
+
 # Bienvenidos 🤟🤟
 
 En esta página encontrarán la presentación y los scripts para un pequeño ejercicio donde intentaremos entender de que se trata la autocorrelación espacial y como verificarla en nuestros datos.
 
 Por favor sigue las instrucciones para descargar los paquetes y scripts.
 
-# Instrucciones
+# Instrucciones 🧐
 
 ## Instalación de paquetes
 
@@ -51,17 +53,33 @@ install.packages(c("tidyverse", # Manejo de datos y gráficas
 
 ## Descargar datos y script
 
-Puedes descargar el proyecto en R que incluye los datos y los scripts que usaremos en la siguiente [dirección](https://github.com/gpandradep/Independencia_espacial/archive/refs/heads/master.zip)
+Puedes descargar el proyecto en R que incluye los datos y los scripts. Para ello usa el siguiente boton y descomprime la carpeta donde lo desees
 
-# Presentación
+```{r}
+#| echo: false
+downloadthis::download_link(
+  link = "https://github.com/gpandradep/Independencia_espacial/archive/refs/heads/master.zip",
+  button_label = "Descargar proyecto",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+# Presentación 📽️
 
 ```{r}
 #| echo: false
 
-xaringanExtra::embed_xaringan(url = "slides.html", ratio = "16:9")
+xaringanExtra::embed_xaringan(url = "slides/slides.html", ratio = "16:9")
 ```
 
-# Código
+\
+
+-   [Diapositivas completas](slides/slides.html.html)
+
+# Código 💻
 
 ## Librerías
 
@@ -549,6 +567,12 @@ Esto fue un ejercicio sencillo, pero lidiar con la ACS merece realizar diversas 
 En caso de encontrar ACS y dependiendo de los objetivos es recomendable usar herramientas como modelos de mínimos cuadrados generalizados (GLS), modelos mixtos, considerar a las coordenadas como covariables o modelos autorregresivos.
 
 # Lecturas recomendadas
+
+```{r}
+#| echo: false
+knitr::include_graphics("https://d23gn3985hkc32.cloudfront.net/wp-content/uploads/2020/12/252164-DangerousToGoAlone.jpg")
+
+```
 
 -   1- [Fox \*et al.\* 2015. Ecological Statistics: Contemporary theory and application](https://oxford.universitypressscholarship.com/view/10.1093/acprof:oso/9780199672547.001.0001/acprof-9780199672547)
 
