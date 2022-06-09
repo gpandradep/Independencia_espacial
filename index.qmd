@@ -75,9 +75,7 @@ downloadthis::download_link(
 xaringanExtra::embed_xaringan(url = "slides/slides.html", ratio = "16:9")
 ```
 
-\
-
--   [Diapositivas completas](slides/slides.html.html)
+[Diapositivas completas](slides/slides.html)
 
 # Código 💻
 
