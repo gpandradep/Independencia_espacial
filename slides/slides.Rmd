@@ -128,7 +128,7 @@ knitr::include_graphics("img/fig1.png")
 ---
 class: inverse, center
 
-### Primera ley de la grografía
+### Primera ley de la geografía
 
 *Tobler W., (1970) "A computer movie simulating urban growth in the Detroit region". Economic Geography, 46(Supplement): 234–240. *
 
